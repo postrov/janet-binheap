@@ -50,11 +50,15 @@
   (loop [i :down-to [len 0]]
     (sift-down heap i)))
 
-(defn add-all [heap elements]
+(defn add-all
+  "Add all elements to the heap. May be more efficient than adding one by one."
+  [heap elements]
   (array/push (heap :content) ;elements)
   (reconstruct heap))
 
-(defn make-heap [elements &named sort-fn key-fn]
+(defn make-heap
+  "Create a heap with given elements, can specify `sort-fn` (default `<`) and `key-fn` (default `identity`)."
+  [elements &named sort-fn key-fn]
   (let [sort-fn (or sort-fn <)
         key-fn (or key-fn identity)
         result @{:content @[]
@@ -63,22 +67,24 @@
     (add-all result elements)
     result))
 
-(defn size [heap]
-  (heap :size))
-
-
-(defn add [heap item]
+(defn add
+  "Add an item to the heap."
+  [heap item]
   (def content (heap :content))
   (def last-pos (length content))
   (array/push content item)
   (sift-up heap last-pos))
 
-(defn peek [heap]
+(defn peek
+  "Return root of the heap (smallest key with default `<` as key function)."
+  [heap]
   (def content (heap :content))
   (unless (empty? content)
     (content 0)))
 
-(defn pop [heap]
+(defn pop
+  "Remove root of the heap and return it."
+  [heap]
   (def content (heap :content))
   (unless (empty? content)
     (def res (content 0))
@@ -87,7 +93,9 @@
     (sift-down heap 0)
     res))
 
-(defn update-key [heap pred update-fn]
+(defn update-key
+  "Find first element that satisfies the `pred` and replace it with value returned by `(update-fn element)`."
+  [heap pred update-fn]
   (let [content (heap :content)
         pos (find-index pred (heap :content))]
     (when pos
@@ -99,17 +107,22 @@
         (sift-up heap pos))
       updated)))
 
-(defn drain [heap]
-  "Pops all elements in heap into an array and returns it. The heap is left empty."
+(defn drain
+  "Pop all elements in heap into an array and returns it. The heap is left empty."
+  [heap]
   (def res @[])
   (while (peek heap)
     (array/push res (pop heap)))
   res)
 
-(defn empty-heap? [heap]
+(defn empty-heap?
+  "Return true if the heap is empty, false otherwise."
+  [heap]
   (empty? (heap :content)))
 
-(defn merge-heaps [& heaps]
+(defn merge-heaps
+  "Merge heap into the first one. Returns first heap."
+  [& heaps]
   (unless (= ;(map (fn [h] [(h :sort-fn) (h :key-fn)]) heaps))
     (error "Attemtped to merge incompatible heaps (key-fn and sort-fn must be the same for all heaps)."))
   (apply array/concat (map |($ :content) heaps))
