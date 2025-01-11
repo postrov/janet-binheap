@@ -5,7 +5,7 @@ A pure janet implementation of binary heap with priority queue operations (peek,
 ## Usage examples
 
 ```janet
-(import janet-binheap :as h)
+(import janet-binheap/heap :as h)
 
 # Simple int max heap:
 (def heap (h/make-heap (range 10) :sort-fn >))
