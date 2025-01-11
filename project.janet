@@ -6,4 +6,4 @@
 
 (declare-source
   :prefix "janet-binheap"
-  :source ["janet-binheap/heap.janet"])
+  :source ["src/heap.janet"])
