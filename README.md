@@ -2,6 +2,14 @@
 
 A pure janet implementation of binary heap with priority queue operations (peek, pop).
 
+## Installation
+
+```
+jpm install 'https://github.com/postrov/janet-binheap'
+```
+
+or just add 'https://github.com/postrov/janet-binheap' to dependencies in your `project.janet`
+
 ## Usage examples
 
 For full API docs look [here](api.md)
