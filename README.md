@@ -12,7 +12,8 @@ or just add 'https://github.com/postrov/janet-binheap' to dependencies in your `
 
 ## Usage examples
 
-For full API docs look [here](api.md)
+* For full API docs look [here](api.md)
+* For more elaborate examples, check out [examples](examples/) directory.
 
 ```janet
 (import janet-binheap/heap :as h)
