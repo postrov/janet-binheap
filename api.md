@@ -2,7 +2,7 @@
 
 ## src/heap
 
-[add](#add), [add-all](#add-all), [drain](#drain), [empty-heap?](#empty-heap), [make-heap](#make-heap), [merge-heaps](#merge-heaps), [peek](#peek), [pop](#pop), [update-key](#update-key)
+[add](#add), [add-all](#add-all), [drain](#drain), [is-empty?](#is-empty), [make-heap](#make-heap), [merge-heaps](#merge-heaps), [peek](#peek), [pop](#pop), [size](#size), [update-key](#update-key)
 
 ## add
 
@@ -40,12 +40,12 @@ Pop all elements in heap into an array and returns it. The heap is left empty.
 
 [3]: src/heap.janet#L110
 
-## empty-heap?
+## is-empty?
 
 **function**  | [source][4]
 
 ```janet
-(empty-heap? heap)
+(is-empty? heap)
 ```
 
 Return true if the heap is empty, false otherwise.
@@ -100,9 +100,21 @@ Remove root of the heap and return it.
 
 [8]: src/heap.janet#L85
 
-## update-key
+## size
 
 **function**  | [source][9]
+
+```janet
+(size heap)
+```
+
+Returns the number of elements in heap.
+
+[9]: src/heap.janet#L133
+
+## update-key
+
+**function**  | [source][10]
 
 ```janet
 (update-key heap pred update-fn)
@@ -110,5 +122,5 @@ Remove root of the heap and return it.
 
 Find first element that satisfies the `pred` and replace it with value returned by `(update-fn element)`.
 
-[9]: src/heap.janet#L96
+[10]: src/heap.janet#L96
 

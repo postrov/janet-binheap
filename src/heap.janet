@@ -115,7 +115,7 @@
     (array/push res (pop heap)))
   res)
 
-(defn empty-heap?
+(defn is-empty?
   "Return true if the heap is empty, false otherwise."
   [heap]
   (empty? (heap :content)))
@@ -129,3 +129,8 @@
   (let [heap1 (first heaps)]
     (reconstruct heap1)
     heap1))
+
+(defn size
+  "Returns the number of elements in heap."
+  [heap]
+  (length (heap :content)))
